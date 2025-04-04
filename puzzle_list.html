@@ -43,10 +43,30 @@
     .star.active {
       color: gold;
     }
+    .btn {
+      display: inline-block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      font-size: 18px;
+      text-decoration: none;
+      color: #fff;
+      background-color: #F2994A;
+      border-radius: 30px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s, transform 0.2s;
+    }
+    
+    .btn:hover {
+      background-color: #F2A65A;
+      transform: scale(1.05);
+    }
   </style>
 </head>
 <body>
-  <h1>題庫</h1>
+  <h1>謎寶空間題庫</h1>
+  <div style="text-align: center;">
+    <a href="index.html" class="btn">返 回 首 頁</a>
+  </div>
   <div class="puzzle-grid" id="puzzleGrid">
     <!-- 題目卡片將由 JavaScript 注入 -->
   </div>
