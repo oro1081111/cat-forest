@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>謎寶空間 - 題庫</title>
+  <style>
+    body { 
+      font-family: Arial, sans-serif; 
+      margin: 0; 
+      padding: 20px; 
+      background-color: #f5f5f5; 
+    }
+    h1 { 
+      text-align: center; 
+    }
+    /* 返回首頁按鈕樣式 */
+    .btn {
+      display: inline-block;
+      margin: 10px auto 20px auto;
+      padding: 10px 20px;
+      font-size: 18px;
+      text-decoration: none;
+      color: #fff;
+      background-color: #F2994A;
+      border-radius: 30px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s, transform 0.2s;
+    }
+    .btn:hover {
+      background-color: #F2A65A;
+      transform: scale(1.05);
+    }
+    .puzzle-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    .puzzle-card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      overflow: hidden;
+      width: 150px;
+      text-align: center;
+      cursor: pointer;
+    }
+    .puzzle-card img {
+      width: 100%;
+      display: block;
+    }
+    .star-container {
+      padding: 5px;
+      font-size: 36px;
+    }
+    .star {
+      color: gray;
+      margin: 0.5px;
+      transition: transform 0.2s;
+    }
+    .star.active {
+      color: gold;
+    }
+    .star:hover {
+      transform: scale(1.5);
+    }
+  </style>
+</head>
+<body>
+  <h1>題庫</h1>
+  <div style="text-align: center;">
+    <a href="index.html" class="btn">返回首頁</a>
+  </div>
+  <div class="puzzle-grid" id="puzzleGrid">
+    <!-- 題目卡片將由 JavaScript 注入 -->
+  </div>
+
+  <script>
+    // 題目資料（ID 與對應圖片檔案名稱）
+    const puzzles = [
+      { id: "01", image: "題本-01.png" },
+      { id: "02", image: "題本-02.png" },
+      { id: "03", image: "題本-03.png" },
+      { id: "04", image: "題本-04.png" },
+      { id: "05", image: "題本-05.png" },
+      { id: "06", image: "題本-06.png" },
+    ];
+
+    const grid = document.getElementById('puzzleGrid');
+
+    puzzles.forEach(puzzle => {
+      // 從 localStorage 取得目前星數，若無則預設 0
+      const starCount = localStorage.getItem("puzzle_" + puzzle.id) || 0;
+      
+      // 建立題目卡片
+      const card = document.createElement('div');
+      card.className = "puzzle-card";
+      card.onclick = function() {
+        window.location.href = "puzzle_detail.html?id=" + puzzle.id;
+      };
+      
+      // 題目圖片
+      const img = document.createElement('img');
+      img.src = puzzle.image;
+      img.alt = "題目 " + puzzle.id;
+      card.appendChild(img);
+      
+      // 星星顯示區
+      const starDiv = document.createElement('div');
+      starDiv.className = "star-container";
+      for(let i = 1; i <= 3; i++){
+        const starSpan = document.createElement('span');
+        starSpan.className = "star" + (i <= starCount ? " active" : "");
+        starSpan.innerHTML = "&#9733;";
+        starDiv.appendChild(starSpan);
+      }
+      card.appendChild(starDiv);
+      
+      grid.appendChild(card);
+    });
+  </script>
+</body>
+</html>

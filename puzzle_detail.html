@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>謎寶空間 - 題目詳情</title>
+  <style>
+    body { 
+      font-family: Arial, sans-serif; 
+      margin: 0; 
+      padding: 20px; 
+      text-align: center; 
+      background-color: #f5f5f5; 
+    }
+    .puzzle-img { 
+      max-width: 90%; 
+      margin: 20px auto; 
+      display: block; 
+    }
+    .star-container { 
+      font-size: 64px; 
+      margin: 10px; 
+    }
+    .star {
+      cursor: pointer;
+      color: gray;
+      margin: 0 5px;
+      transition: transform 0.2s;
+    }
+    .star.active {
+      color: gold;
+    }
+    .star:hover {
+      transform: scale(1.5);
+    }
+    /* 原有共用按鈕樣式 */
+    .btn {
+      display: inline-block;
+      margin: 10px;
+      padding: 10px 20px;
+      text-decoration: none;
+      color: #fff;
+      border-radius: 30px;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+    .btn:hover {
+      transform: scale(1.05);
+    }
+    /* 針對偷看解答按鈕設定 (紅色系) */
+    .btn-peek {
+      background-color: #e16254;
+    }
+    .btn-peek:hover {
+      background-color: #e9897e;
+    }
+    /* 針對返回題庫按鈕設定 (綠色系) */
+    .btn-back {
+      background-color: #35ca73;
+    }
+    .btn-back:hover {
+      background-color: #51da8a;
+    }
+  </style>
+</head>
+<body>
+  <div id="content">
+    <!-- 題目內容將由 JavaScript 注入 -->
+  </div>
+  <div>
+    <a href="#" id="peekBtn" class="btn btn-peek">偷看解答</a>
+    <a href="puzzle_list.html" class="btn btn-back">返回題庫</a>
+  </div>
+  
+  <script>
+    // 從 URL 參數中取得題目 ID
+    const urlParams = new URLSearchParams(window.location.search);
+    const puzzleId = urlParams.get('id');
+    
+    const content = document.getElementById('content');
+    
+    if (!puzzleId) {
+      content.innerHTML = "<p>無效的題目ID</p>";
+    } else {
+      // 顯示題目圖片（假設檔名格式為 "題本-<ID>.png"）
+      const img = document.createElement('img');
+      img.src = "題本-" + puzzleId + ".png";
+      img.alt = "題目 " + puzzleId;
+      img.className = "puzzle-img";
+      content.appendChild(img);
+      
+      // 互動式星星區
+      const starDiv = document.createElement('div');
+      starDiv.className = "star-container";
+      
+      // 從 localStorage 取得當前星數，預設為 0
+      let currentStars = parseInt(localStorage.getItem("puzzle_" + puzzleId)) || 0;
+      
+      // 更新星星顯示函數
+      function updateStars() {
+        starDiv.innerHTML = "";
+        for (let i = 1; i <= 3; i++) {
+          const starSpan = document.createElement('span');
+          starSpan.className = "star" + (i <= currentStars ? " active" : "");
+          starSpan.innerHTML = "&#9733;";
+          // 點擊星星更新星數（點同一顆可降低星數）
+          starSpan.onclick = function() {
+            if (currentStars === i) {
+              currentStars = i - 1;
+            } else {
+              currentStars = i;
+            }
+            localStorage.setItem("puzzle_" + puzzleId, currentStars);
+            updateStars();
+            updateStarText();
+          };
+          starDiv.appendChild(starSpan);
+        }
+      }
+      
+      updateStars();
+      content.appendChild(starDiv);
+      
+      // 顯示當前星數訊息
+      const starText = document.createElement('p');
+      function updateStarText() {
+        if (currentStars === 0) {
+          starText.innerText = "你還在迷路中";
+        } else if (currentStars === 1) {
+          starText.innerText = "找到鑰匙";
+        } else if (currentStars === 2) {
+          starText.innerText = "成功逃離";
+        } else {
+          starText.innerText = "找到最佳步數，完美通關!";
+        }
+      }
+      updateStarText();
+      content.appendChild(starText);
+    }
+    
+    // 偷看解答按鈕：根據不同題目顯示不同的解答文字
+    document.getElementById('peekBtn').onclick = function(e) {
+      e.preventDefault();
+      // 定義各題目的解答文字，可依需求修改
+      const answers = {
+        "01": "PBY1-K-YRP2-D",
+        "02": "PBY1-K-YRP2-D",
+        "03": "PBY1-K-YRP2-D",
+        "04": "PBY1-K-YRP2-D",
+        "05": "PBY1-K-YRP2-D",
+        "06": "PBY1-K-YRP2-D"
+      };
+      
+      if (answers[puzzleId]) {
+        alert(answers[puzzleId]);
+      } else {
+        alert("目前無解答");
+      }
+    };
+  </script>
+</body>
+</html>

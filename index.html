@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>謎寶空間 - 首頁</title>
+  <style>
+    body { 
+      font-family: 'Helvetica Neue', Arial, sans-serif; 
+      text-align: center; 
+      margin: 0; 
+      padding: 0; 
+      background-color: #fff;
+    }
+    header { 
+      padding: 20px; 
+      background-color: #fff;
+    }
+    img.logo { 
+      max-width: 200px;
+      margin-bottom: 20px;
+    }
+    /* 共用按鈕樣式 */
+    .btn {
+      display: block;
+      margin: 20px auto;
+      padding: 15px 20px;
+      font-size: 20px;
+      text-decoration: none;
+      color: #ffffff;
+      border: none;
+      border-radius: 30px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 80%;
+      max-width: 300px;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+    .btn:hover {
+      transform: scale(1.05);
+    }
+    /* 各按鈕個別的樣式 */
+    .btn-explain {
+      background-color: #F2994A; /* 暖橘色 */
+    }
+    .btn-explain:hover {
+      background-color: #F2A65A;
+    }
+    .btn-start {
+      background-color: #22c165; /* 綠色 */
+    }
+    .btn-start:hover {
+      background-color: #2edf78;
+    }
+    .btn-about {
+      background-color: #2687c8; /* 藍色 */
+    }
+    .btn-about:hover {
+      background-color: #2ea5f4;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="謎寶空間LOGO.png" alt="謎寶空間 LOGO" class="logo">
+  </header>
+  <main>
+    <a href="#" class="btn btn-explain">遊 戲 說 明</a>
+    <a href="puzzle_list.html" class="btn btn-start">開 始 遊 戲</a>
+    <a href="#" class="btn btn-about">關 於 奧 羅</a>
+  </main>
