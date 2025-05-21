@@ -60,16 +60,40 @@
       background-color: #F2A65A;
       transform: scale(1.05);
     }
+
+    .button-row {
+  display: flex;
+  justify-content: center;
+  gap: 20px;         /* 按鈕之間的間距 */
+  margin: 20px 0;
+  flex-wrap: wrap;   /* 小螢幕時自動換行 */
+}
+
+/* 左側按鈕：淡紫色 */
+.btn-left {
+  background-color: #2687c8;
+}
+.btn-left:hover {
+  background-color: #2687c8;
+}
+
+/* 右側按鈕：紅色 */
+.btn-right {
+  background-color: #F2994A;
+}
+.btn-right:hover {
+  background-color: #F2994A;
+}
+
   </style>
 </head>
 <body>
   <h1>謎寶空間題庫</h1>
-  <div style="text-align: center;">
-    <a href="index.html" class="btn">返 回 首 頁</a>
+  <div class="button-row">
+    <a href="index.html" class="btn btn-left">返 回 首 頁</a>
+    <a href="https://drive.google.com/drive/folders/1sl7kXtKypRaTtymbpXecF-MHN-igiyKe?usp=sharing" class="btn btn-right" target="_blank">紙 本 題 庫</a>
   </div>
-  <div style="text-align: center;">
-    <a href="https://drive.google.com/drive/folders/1sl7kXtKypRaTtymbpXecF-MHN-igiyKe?usp=sharing" class="btn">紙 本 題 庫</a>
-  </div>
+  
   <div class="puzzle-grid" id="puzzleGrid">
     <!-- 題目卡片將由 JavaScript 注入 -->
   </div>
